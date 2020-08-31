@@ -35,6 +35,18 @@ footer: Except where otherwise noted, content on this site is licensed under a C
   </div>
 </div>
 
+<div class="solutionBox">
+    <a>
+      <div>
+         <p><strong>Create a VPC cluster</strong></p>
+         <p class="bx--type-caption">Create your cluster on the second generation of compute resources in a Virtual Private Cloud (VPC) that gives you the security of a private cloud with the scalability of a public cloud.</p>
+      </div>
+    </a>
+  </div>
+
+
+
+
 ## Downloadable PDF Files
 
 ### Zowe documentation
