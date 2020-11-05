@@ -176,7 +176,8 @@
 </ul><ul><li><a href="#zowe_provisioning_provision">provision | prov</a><ul><li><a href="#zowe_provisioning_provision_template">template | tem</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#zowe_secure-credential-store">secure-credential-store | scs</a><ul><li><a href="#zowe_secure-credential-store_update">update | u</a></li>
+<li><a href="#zowe_secure-credential-store">secure-credential-store | scs</a><ul><li><a href="#zowe_secure-credential-store_revert">revert | r</a></li>
+</ul><ul><li><a href="#zowe_secure-credential-store_update">update | u</a></li>
 </ul></li>
 <li><a href="#zowe_zos-console">zos-console | console</a><ul><li><a href="#zowe_zos-console_collect">collect</a><ul><li><a href="#zowe_zos-console_collect_sync-responses">sync-responses | sr</a></li>
 </ul></li>
@@ -6899,6 +6900,13 @@ specify this option if you are not using an API mediation layer.</li>
 default encoding if not specified is 1047.</li>
 </ul>
 </li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
+</ul>
+</li>
 <li><p><code>--overwrite</code>  | <code>--ow</code> <em>(boolean)</em></p>
 <ul>
 <li>Overwrite the zosmf profile when a profile of the same name exists.</li>
@@ -8269,6 +8277,13 @@ specify this option if you are not using an API mediation layer.</li>
 default encoding if not specified is 1047.</li>
 </ul>
 </li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
+</ul>
+</li>
 </ul>
 <h4 id="examples">Examples</h4>
 <ul>
@@ -9135,6 +9150,19 @@ default token type, which is provided by &#39;zowe auth login&#39;.</li>
 <hr class="no-print">
 <a name="zowe_secure-credential-store"></a><h2 class="page-break"><a href="#zowe">zowe</a> › <a href="#zowe_secure-credential-store">secure-credential-store</a><button id="btn-print" class="no-print" onclick="window.print();" title="Print">🖨️</button></h2>
 <p>Store credentials securely in profiles by encrypting them</p>
+<a class="cmd-anchor" name="zowe_secure-credential-store_revert"></a><h3><a href="#zowe">zowe</a> › <a href="#zowe_secure-credential-store">secure-credential-store</a> › <a href="#zowe_secure-credential-store_revert">revert</a><button id="btn-print" class="no-print" onclick="window.print();" title="Print">🖨️</button></h3>
+<p>Reverts all secure profiles to be stored in plain text</p>
+<h4 id="usage">Usage</h4>
+<p>   zowe  secure-credential-store revert [options]</p>
+<h4 id="required-options">Required Options</h4>
+<ul>
+<li><p><code>--for-sure</code>  | <code>-f</code> <em>(boolean)</em></p>
+<ul>
+<li>Specify this option to confirm that you want to revert all credentials to be
+stored insecurely.</li>
+</ul>
+</li>
+</ul>
 <a class="cmd-anchor" name="zowe_secure-credential-store_update"></a><h3><a href="#zowe">zowe</a> › <a href="#zowe_secure-credential-store">secure-credential-store</a> › <a href="#zowe_secure-credential-store_update">update</a><button id="btn-print" class="no-print" onclick="window.print();" title="Print">🖨️</button></h3>
 <p>Updates all plain text profiles to be securely stored</p>
 <h4 id="usage">Usage</h4>
@@ -9514,6 +9542,16 @@ specify this option if you are not using an API mediation layer.</li>
 </ul>
 </li>
 </ul>
+<h4 id="options">Options</h4>
+<ul>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
+</ul>
+</li>
+</ul>
 <h4 id="profile-options">Profile Options</h4>
 <ul>
 <li><p><code>--zosmf-profile</code>  | <code>--zosmf-p</code> <em>(string)</em></p>
@@ -9584,7 +9622,7 @@ data set named &#39;USER.TO.SET&#39;:</p>
 </ul>
 <h4 id="options">Options</h4>
 <ul>
-<li><p><code>--block-size</code>  | <code>--bs</code> <em>(number)</em></p>
+<li><p><code>--block-size</code>  | <code>--bs</code> | <code>--blksize</code> <em>(number)</em></p>
 <ul>
 <li><p>The block size for the data set (for example, 6160)</p>
 <p>Default value: 27998</p>
@@ -9596,17 +9634,17 @@ data set named &#39;USER.TO.SET&#39;:</p>
 <li>The SMS data class to use for the allocation</li>
 </ul>
 </li>
-<li><p><code>--data-set-type</code>  | <code>--dst</code> <em>(string)</em></p>
+<li><p><code>--data-set-type</code>  | <code>--dst</code> | <code>--dsntype</code> <em>(string)</em></p>
 <ul>
 <li>The data set type</li>
 </ul>
 </li>
-<li><p><code>--device-type</code>  | <code>--dt</code> <em>(string)</em></p>
+<li><p><code>--device-type</code>  | <code>--dt</code> | <code>--unit</code> <em>(string)</em></p>
 <ul>
 <li>The device type, also known as &#39;unit&#39;</li>
 </ul>
 </li>
-<li><p><code>--directory-blocks</code>  | <code>--db</code> <em>(number)</em></p>
+<li><p><code>--directory-blocks</code>  | <code>--db</code> | <code>--dirblks</code> <em>(number)</em></p>
 <ul>
 <li><p>The number of directory blocks (for example, 25)</p>
 <p>Default value: 25</p>
@@ -9625,14 +9663,14 @@ data set named &#39;USER.TO.SET&#39;:</p>
 </li>
 </ul>
 </li>
-<li><p><code>--record-format</code>  | <code>--rf</code> <em>(string)</em></p>
+<li><p><code>--record-format</code>  | <code>--rf</code> | <code>--recfm</code> <em>(string)</em></p>
 <ul>
 <li><p>The record format for the data set (for example, FB for &quot;Fixed Block&quot;)</p>
 <p>Default value: U</p>
 </li>
 </ul>
 </li>
-<li><p><code>--record-length</code>  | <code>--rl</code> <em>(number)</em></p>
+<li><p><code>--record-length</code>  | <code>--rl</code> | <code>--lrecl</code> <em>(number)</em></p>
 <ul>
 <li><p>The logical record length. Analogous to the length of a line (for example, 80)</p>
 <p>Default value: 27998</p>
@@ -9661,10 +9699,17 @@ becomes ~10% of the primary).</li>
 <li>The SMS storage class to use for the allocation</li>
 </ul>
 </li>
-<li><p><code>--volume-serial</code>  | <code>--vs</code> <em>(string)</em></p>
+<li><p><code>--volume-serial</code>  | <code>--vs</code> | <code>--volser</code> <em>(string)</em></p>
 <ul>
 <li>The volume serial (VOLSER) on which you want the data set to be placed. A
 VOLSER is analogous to a drive name on a PC.</li>
+</ul>
+</li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
 </ul>
 </li>
 </ul>
@@ -9757,7 +9802,7 @@ default parameters:</p>
 </ul>
 <h4 id="options">Options</h4>
 <ul>
-<li><p><code>--block-size</code>  | <code>--bs</code> <em>(number)</em></p>
+<li><p><code>--block-size</code>  | <code>--bs</code> | <code>--blksize</code> <em>(number)</em></p>
 <ul>
 <li><p>The block size for the data set (for example, 6160)</p>
 <p>Default value: 32760</p>
@@ -9769,17 +9814,17 @@ default parameters:</p>
 <li>The SMS data class to use for the allocation</li>
 </ul>
 </li>
-<li><p><code>--data-set-type</code>  | <code>--dst</code> <em>(string)</em></p>
+<li><p><code>--data-set-type</code>  | <code>--dst</code> | <code>--dsntype</code> <em>(string)</em></p>
 <ul>
 <li>The data set type</li>
 </ul>
 </li>
-<li><p><code>--device-type</code>  | <code>--dt</code> <em>(string)</em></p>
+<li><p><code>--device-type</code>  | <code>--dt</code> | <code>--unit</code> <em>(string)</em></p>
 <ul>
 <li>The device type, also known as &#39;unit&#39;</li>
 </ul>
 </li>
-<li><p><code>--directory-blocks</code>  | <code>--db</code> <em>(number)</em></p>
+<li><p><code>--directory-blocks</code>  | <code>--db</code> | <code>--dirblks</code> <em>(number)</em></p>
 <ul>
 <li><p>The number of directory blocks (for example, 25)</p>
 <p>Default value: 25</p>
@@ -9798,14 +9843,14 @@ default parameters:</p>
 </li>
 </ul>
 </li>
-<li><p><code>--record-format</code>  | <code>--rf</code> <em>(string)</em></p>
+<li><p><code>--record-format</code>  | <code>--rf</code> | <code>--recfm</code> <em>(string)</em></p>
 <ul>
 <li><p>The record format for the data set (for example, FB for &quot;Fixed Block&quot;)</p>
 <p>Default value: VB</p>
 </li>
 </ul>
 </li>
-<li><p><code>--record-length</code>  | <code>--rl</code> <em>(number)</em></p>
+<li><p><code>--record-length</code>  | <code>--rl</code> | <code>--lrecl</code> <em>(number)</em></p>
 <ul>
 <li><p>The logical record length. Analogous to the length of a line (for example, 80)</p>
 <p>Default value: 260</p>
@@ -9834,10 +9879,17 @@ becomes ~10% of the primary).</li>
 <li>The SMS storage class to use for the allocation</li>
 </ul>
 </li>
-<li><p><code>--volume-serial</code>  | <code>--vs</code> <em>(string)</em></p>
+<li><p><code>--volume-serial</code>  | <code>--vs</code> | <code>--volser</code> <em>(string)</em></p>
 <ul>
 <li>The volume serial (VOLSER) on which you want the data set to be placed. A
 VOLSER is analogous to a drive name on a PC.</li>
+</ul>
+</li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
 </ul>
 </li>
 </ul>
@@ -9929,7 +9981,7 @@ default token type, which is provided by &#39;zowe auth login&#39;.</li>
 </ul>
 <h4 id="options">Options</h4>
 <ul>
-<li><p><code>--block-size</code>  | <code>--bs</code> <em>(number)</em></p>
+<li><p><code>--block-size</code>  | <code>--bs</code> | <code>--blksize</code> <em>(number)</em></p>
 <ul>
 <li><p>The block size for the data set (for example, 6160)</p>
 <p>Default value: 6160</p>
@@ -9941,17 +9993,17 @@ default token type, which is provided by &#39;zowe auth login&#39;.</li>
 <li>The SMS data class to use for the allocation</li>
 </ul>
 </li>
-<li><p><code>--data-set-type</code>  | <code>--dst</code> <em>(string)</em></p>
+<li><p><code>--data-set-type</code>  | <code>--dst</code> | <code>--dsntype</code> <em>(string)</em></p>
 <ul>
 <li>The data set type</li>
 </ul>
 </li>
-<li><p><code>--device-type</code>  | <code>--dt</code> <em>(string)</em></p>
+<li><p><code>--device-type</code>  | <code>--dt</code> | <code>--unit</code> <em>(string)</em></p>
 <ul>
 <li>The device type, also known as &#39;unit&#39;</li>
 </ul>
 </li>
-<li><p><code>--directory-blocks</code>  | <code>--db</code> <em>(number)</em></p>
+<li><p><code>--directory-blocks</code>  | <code>--db</code> | <code>--dirblks</code> <em>(number)</em></p>
 <ul>
 <li><p>The number of directory blocks (for example, 25)</p>
 <p>Default value: 25</p>
@@ -9970,14 +10022,14 @@ default token type, which is provided by &#39;zowe auth login&#39;.</li>
 </li>
 </ul>
 </li>
-<li><p><code>--record-format</code>  | <code>--rf</code> <em>(string)</em></p>
+<li><p><code>--record-format</code>  | <code>--rf</code> | <code>--recfm</code> <em>(string)</em></p>
 <ul>
 <li><p>The record format for the data set (for example, FB for &quot;Fixed Block&quot;)</p>
 <p>Default value: FB</p>
 </li>
 </ul>
 </li>
-<li><p><code>--record-length</code>  | <code>--rl</code> <em>(number)</em></p>
+<li><p><code>--record-length</code>  | <code>--rl</code> | <code>--lrecl</code> <em>(number)</em></p>
 <ul>
 <li><p>The logical record length. Analogous to the length of a line (for example, 80)</p>
 <p>Default value: 80</p>
@@ -10006,10 +10058,17 @@ becomes ~10% of the primary).</li>
 <li>The SMS storage class to use for the allocation</li>
 </ul>
 </li>
-<li><p><code>--volume-serial</code>  | <code>--vs</code> <em>(string)</em></p>
+<li><p><code>--volume-serial</code>  | <code>--vs</code> | <code>--volser</code> <em>(string)</em></p>
 <ul>
 <li>The volume serial (VOLSER) on which you want the data set to be placed. A
 VOLSER is analogous to a drive name on a PC.</li>
+</ul>
+</li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
 </ul>
 </li>
 </ul>
@@ -10101,7 +10160,7 @@ default token type, which is provided by &#39;zowe auth login&#39;.</li>
 </ul>
 <h4 id="options">Options</h4>
 <ul>
-<li><p><code>--block-size</code>  | <code>--bs</code> <em>(number)</em></p>
+<li><p><code>--block-size</code>  | <code>--bs</code> | <code>--blksize</code> <em>(number)</em></p>
 <ul>
 <li><p>The block size for the data set (for example, 6160)</p>
 <p>Default value: 6160</p>
@@ -10113,17 +10172,17 @@ default token type, which is provided by &#39;zowe auth login&#39;.</li>
 <li>The SMS data class to use for the allocation</li>
 </ul>
 </li>
-<li><p><code>--data-set-type</code>  | <code>--dst</code> <em>(string)</em></p>
+<li><p><code>--data-set-type</code>  | <code>--dst</code> | <code>--dsntype</code> <em>(string)</em></p>
 <ul>
 <li>The data set type</li>
 </ul>
 </li>
-<li><p><code>--device-type</code>  | <code>--dt</code> <em>(string)</em></p>
+<li><p><code>--device-type</code>  | <code>--dt</code> | <code>--unit</code> <em>(string)</em></p>
 <ul>
 <li>The device type, also known as &#39;unit&#39;</li>
 </ul>
 </li>
-<li><p><code>--directory-blocks</code>  | <code>--db</code> <em>(number)</em></p>
+<li><p><code>--directory-blocks</code>  | <code>--db</code> | <code>--dirblks</code> <em>(number)</em></p>
 <ul>
 <li><p>The number of directory blocks (for example, 25)</p>
 <p>Default value: 5</p>
@@ -10142,14 +10201,14 @@ default token type, which is provided by &#39;zowe auth login&#39;.</li>
 </li>
 </ul>
 </li>
-<li><p><code>--record-format</code>  | <code>--rf</code> <em>(string)</em></p>
+<li><p><code>--record-format</code>  | <code>--rf</code> | <code>--recfm</code> <em>(string)</em></p>
 <ul>
 <li><p>The record format for the data set (for example, FB for &quot;Fixed Block&quot;)</p>
 <p>Default value: FB</p>
 </li>
 </ul>
 </li>
-<li><p><code>--record-length</code>  | <code>--rl</code> <em>(number)</em></p>
+<li><p><code>--record-length</code>  | <code>--rl</code> | <code>--lrecl</code> <em>(number)</em></p>
 <ul>
 <li><p>The logical record length. Analogous to the length of a line (for example, 80)</p>
 <p>Default value: 80</p>
@@ -10178,10 +10237,17 @@ becomes ~10% of the primary).</li>
 <li>The SMS storage class to use for the allocation</li>
 </ul>
 </li>
-<li><p><code>--volume-serial</code>  | <code>--vs</code> <em>(string)</em></p>
+<li><p><code>--volume-serial</code>  | <code>--vs</code> | <code>--volser</code> <em>(string)</em></p>
 <ul>
 <li>The volume serial (VOLSER) on which you want the data set to be placed. A
 VOLSER is analogous to a drive name on a PC.</li>
+</ul>
+</li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
 </ul>
 </li>
 </ul>
@@ -10273,7 +10339,7 @@ default token type, which is provided by &#39;zowe auth login&#39;.</li>
 </ul>
 <h4 id="options">Options</h4>
 <ul>
-<li><p><code>--block-size</code>  | <code>--bs</code> <em>(number)</em></p>
+<li><p><code>--block-size</code>  | <code>--bs</code> | <code>--blksize</code> <em>(number)</em></p>
 <ul>
 <li><p>The block size for the data set (for example, 6160)</p>
 <p>Default value: 6160</p>
@@ -10285,12 +10351,12 @@ default token type, which is provided by &#39;zowe auth login&#39;.</li>
 <li>The SMS data class to use for the allocation</li>
 </ul>
 </li>
-<li><p><code>--device-type</code>  | <code>--dt</code> <em>(string)</em></p>
+<li><p><code>--device-type</code>  | <code>--dt</code> | <code>--unit</code> <em>(string)</em></p>
 <ul>
 <li>The device type, also known as &#39;unit&#39;</li>
 </ul>
 </li>
-<li><p><code>--directory-blocks</code>  | <code>--db</code> <em>(number)</em></p>
+<li><p><code>--directory-blocks</code>  | <code>--db</code> | <code>--dirblks</code> <em>(number)</em></p>
 <ul>
 <li>The number of directory blocks (for example, 25)</li>
 </ul>
@@ -10307,14 +10373,14 @@ default token type, which is provided by &#39;zowe auth login&#39;.</li>
 </li>
 </ul>
 </li>
-<li><p><code>--record-format</code>  | <code>--rf</code> <em>(string)</em></p>
+<li><p><code>--record-format</code>  | <code>--rf</code> | <code>--recfm</code> <em>(string)</em></p>
 <ul>
 <li><p>The record format for the data set (for example, FB for &quot;Fixed Block&quot;)</p>
 <p>Default value: FB</p>
 </li>
 </ul>
 </li>
-<li><p><code>--record-length</code>  | <code>--rl</code> <em>(number)</em></p>
+<li><p><code>--record-length</code>  | <code>--rl</code> | <code>--lrecl</code> <em>(number)</em></p>
 <ul>
 <li><p>The logical record length. Analogous to the length of a line (for example, 80)</p>
 <p>Default value: 80</p>
@@ -10343,10 +10409,17 @@ becomes ~10% of the primary).</li>
 <li>The SMS storage class to use for the allocation</li>
 </ul>
 </li>
-<li><p><code>--volume-serial</code>  | <code>--vs</code> <em>(string)</em></p>
+<li><p><code>--volume-serial</code>  | <code>--vs</code> | <code>--volser</code> <em>(string)</em></p>
 <ul>
 <li>The volume serial (VOLSER) on which you want the data set to be placed. A
 VOLSER is analogous to a drive name on a PC.</li>
+</ul>
+</li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
 </ul>
 </li>
 </ul>
@@ -10444,7 +10517,7 @@ parameters:</p>
 <li>The SMS data class to use for the allocation</li>
 </ul>
 </li>
-<li><p><code>--data-set-organization</code>  | <code>--dso</code> <em>(string)</em></p>
+<li><p><code>--data-set-organization</code>  | <code>--dso</code> | <code>--dsorg</code> <em>(string)</em></p>
 <ul>
 <li><p>The data set organization.</p>
 <p>Default value: INDEXED</p>
@@ -10506,6 +10579,13 @@ of items to allocate (nItems). You specify the type of item by keyword.</p>
 volume by its volume serial (VOLSER). To specify more than one volume, enclose
 the option in double-quotes and separate each VOLSER with a space. You must
 specify the volumes option when your cluster is not SMS-managed.</li>
+</ul>
+</li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
 </ul>
 </li>
 </ul>
@@ -10616,6 +10696,13 @@ retained for 100 days:</p>
 <li>Specifies the file permission bits to use when creating the directory.</li>
 </ul>
 </li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
+</ul>
+</li>
 </ul>
 <h4 id="zosmf-connection-options">Zosmf Connection Options</h4>
 <ul>
@@ -10714,6 +10801,13 @@ default token type, which is provided by &#39;zowe auth login&#39;.</li>
 <li><p><code>--mode</code>  | <code>-m</code> <em>(string)</em></p>
 <ul>
 <li>Specifies the file permission bits to use when creating the file.</li>
+</ul>
+</li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
 </ul>
 </li>
 </ul>
@@ -10873,6 +10967,13 @@ each VOLSER with a space. You must specify the volumes option when your cluster
 is not SMS-managed.</li>
 </ul>
 </li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
+</ul>
+</li>
 </ul>
 <h4 id="zosmf-connection-options">Zosmf Connection Options</h4>
 <ul>
@@ -10992,6 +11093,13 @@ permanently.</li>
 only when the data set is not catalogued on the system.</li>
 </ul>
 </li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
+</ul>
+</li>
 </ul>
 <h4 id="zosmf-connection-options">Zosmf Connection Options</h4>
 <ul>
@@ -11101,6 +11209,13 @@ cluster was defined or altered.</p>
 period or date.</p>
 <p>Default value: false</p>
 </li>
+</ul>
+</li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
 </ul>
 </li>
 </ul>
@@ -11235,6 +11350,13 @@ overwriting the components with zeros:</p>
 </li>
 </ul>
 </li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
+</ul>
+</li>
 </ul>
 <h4 id="zosmf-connection-options">Zosmf Connection Options</h4>
 <ul>
@@ -11336,6 +11458,13 @@ permanently.</li>
 <li><p><code>--recursive</code>  | <code>-r</code> <em>(boolean)</em></p>
 <ul>
 <li>Delete directories recursively.</li>
+</ul>
+</li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
 </ul>
 </li>
 </ul>
@@ -11483,6 +11612,16 @@ specify this option if you are not using an API mediation layer.</li>
 </ul>
 </li>
 </ul>
+<h4 id="options">Options</h4>
+<ul>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
+</ul>
+</li>
+</ul>
 <h4 id="profile-options">Profile Options</h4>
 <ul>
 <li><p><code>--zosmf-profile</code>  | <code>--zosmf-p</code> <em>(string)</em></p>
@@ -11597,6 +11736,13 @@ letter case</p>
 <li>The volume serial (VOLSER) where the data set resides. You can use this option
 at any time. However, the VOLSER is required only when the data set is not
 cataloged on the system. A VOLSER is analogous to a drive name on a PC.</li>
+</ul>
+</li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
 </ul>
 </li>
 </ul>
@@ -11736,6 +11882,13 @@ at any time. However, the VOLSER is required only when the data set is not
 cataloged on the system. A VOLSER is analogous to a drive name on a PC.</li>
 </ul>
 </li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
+</ul>
+</li>
 </ul>
 <h4 id="zosmf-connection-options">Zosmf Connection Options</h4>
 <ul>
@@ -11843,6 +11996,13 @@ is performed using the file encoding specified.</li>
 <ul>
 <li>The path to the local file where you want to download the content. When you
 omit the option, the command generates a file name automatically for you.</li>
+</ul>
+</li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
 </ul>
 </li>
 </ul>
@@ -11985,6 +12145,16 @@ specify this option if you are not using an API mediation layer.</li>
 </ul>
 </li>
 </ul>
+<h4 id="options">Options</h4>
+<ul>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
+</ul>
+</li>
+</ul>
 <h4 id="profile-options">Profile Options</h4>
 <ul>
 <li><p><code>--zosmf-profile</code>  | <code>--zosmf-p</code> <em>(string)</em></p>
@@ -12077,6 +12247,16 @@ specify this option if you are not using an API mediation layer.</li>
 </ul>
 </li>
 </ul>
+<h4 id="options">Options</h4>
+<ul>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
+</ul>
+</li>
+</ul>
 <h4 id="profile-options">Profile Options</h4>
 <ul>
 <li><p><code>--zosmf-profile</code>  | <code>--zosmf-p</code> <em>(string)</em></p>
@@ -12149,6 +12329,19 @@ modified.</li>
 <li>The option --max-length specifies the maximum number of items to return.
 Skip this parameter to return all items. If you specify an incorrect value, the
 parameter returns up to 1000 items.</li>
+</ul>
+</li>
+<li><p><code>--pattern</code>  <em>(string)</em></p>
+<ul>
+<li>The option --pattern specifies the match pattern used when listing members in
+a data set. The default is to match against all members, e.g. &quot;*&quot;.</li>
+</ul>
+</li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
 </ul>
 </li>
 </ul>
@@ -12235,6 +12428,12 @@ default token type, which is provided by &#39;zowe auth login&#39;.</li>
 <li><code>zowe  zos-files list all-members &quot;ibmuser.cntl&quot; --max 5</code> <button class="btn-copy no-print" data-balloon-pos="right" data-clipboard-text="zowe  zos-files list all-members &quot;ibmuser.cntl&quot; --max 5">Copy</button></li>
 </ul>
 </li>
+<li><p>Show the first 4 members of the data set &quot;ibmuser.cntl&quot;
+matching an input pattern&quot;:</p>
+<ul>
+<li><code>zowe  zos-files list all-members &quot;sys1.maclib&quot; --pattern IJK* --max 4</code> <button class="btn-copy no-print" data-balloon-pos="right" data-clipboard-text="zowe  zos-files list all-members &quot;sys1.maclib&quot; --pattern IJK* --max 4">Copy</button></li>
+</ul>
+</li>
 </ul>
 <a class="cmd-anchor" name="zowe_zos-files_list_data-set"></a><h3><a href="#zowe">zowe</a> › <a href="#zowe_zos-files">zos-files</a> › <a href="#zowe_zos-files_list">list</a> › <a href="#zowe_zos-files_list_data-set">data-set</a><button id="btn-print" class="no-print" onclick="window.print();" title="Print">🖨️</button></h3>
 <p>List data sets that match a pattern in the data set name</p>
@@ -12263,6 +12462,13 @@ modified.</li>
 <li>The option --max-length specifies the maximum number of items to return.
 Skip this parameter to return all items. If you specify an incorrect value, the
 parameter returns up to 1000 items.</li>
+</ul>
+</li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
 </ul>
 </li>
 </ul>
@@ -12384,6 +12590,13 @@ mutually exclusive.</li>
 <ul>
 <li>Specifies the path where the file system is mounted. This option and --fsname
 are mutually exclusive.</li>
+</ul>
+</li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
 </ul>
 </li>
 </ul>
@@ -12525,6 +12738,13 @@ in the output.</li>
 <li>The option --max-length specifies the maximum number of items to return.
 Skip this parameter to return all items. If you specify an incorrect value, the
 parameter returns up to 1000 items.</li>
+</ul>
+</li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
 </ul>
 </li>
 </ul>
@@ -12673,6 +12893,13 @@ displaying the headers associated with the file detail:</p>
 </li>
 </ul>
 </li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
+</ul>
+</li>
 </ul>
 <h4 id="zosmf-connection-options">Zosmf Connection Options</h4>
 <ul>
@@ -12788,6 +13015,13 @@ read/write).</p>
 </li>
 </ul>
 </li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
+</ul>
+</li>
 </ul>
 <h4 id="zosmf-connection-options">Zosmf Connection Options</h4>
 <ul>
@@ -12890,6 +13124,13 @@ default token type, which is provided by &#39;zowe auth login&#39;.</li>
 (default) the request is queued.</p>
 <p>Default value: false</p>
 </li>
+</ul>
+</li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
 </ul>
 </li>
 </ul>
@@ -13025,6 +13266,16 @@ specify this option if you are not using an API mediation layer.</li>
 </ul>
 </li>
 </ul>
+<h4 id="options">Options</h4>
+<ul>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
+</ul>
+</li>
+</ul>
 <h4 id="profile-options">Profile Options</h4>
 <ul>
 <li><p><code>--zosmf-profile</code>  | <code>--zosmf-p</code> <em>(string)</em></p>
@@ -13122,6 +13373,16 @@ specify this option if you are not using an API mediation layer.</li>
 </ul>
 </li>
 </ul>
+<h4 id="options">Options</h4>
+<ul>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
+</ul>
+</li>
+</ul>
 <h4 id="profile-options">Profile Options</h4>
 <ul>
 <li><p><code>--zosmf-profile</code>  | <code>--zosmf-p</code> <em>(string)</em></p>
@@ -13212,6 +13473,16 @@ specify this option if you are not using an API mediation layer.</li>
 </ul>
 </li>
 </ul>
+<h4 id="options">Options</h4>
+<ul>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
+</ul>
+</li>
+</ul>
 <h4 id="profile-options">Profile Options</h4>
 <ul>
 <li><p><code>--zosmf-profile</code>  | <code>--zosmf-p</code> <em>(string)</em></p>
@@ -13275,6 +13546,12 @@ The data transfer process returns each record as-is, without translation. No
 delimiters are added between records.</li>
 </ul>
 </li>
+<li><p><code>--encoding</code>  | <code>--ec</code> <em>(number)</em></p>
+<ul>
+<li>Data content in encoding mode, which means that data conversion is performed
+according to the encoding specified.</li>
+</ul>
+</li>
 <li><p><code>--migrated-recall</code>  | <code>--mr</code> <em>(string)</em></p>
 <ul>
 <li><p>The method by which migrated data set is handled. By default, a migrated data
@@ -13289,6 +13566,13 @@ nowait, error</p>
 <li>The volume serial (VOLSER) where the data set resides. You can use this option
 at any time. However, the VOLSER is required only when the data set is not
 cataloged on the system. A VOLSER is analogous to a drive name on a PC.</li>
+</ul>
+</li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
 </ul>
 </li>
 </ul>
@@ -13469,6 +13753,13 @@ concurrent requests.</p>
 </li>
 </ul>
 </li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
+</ul>
+</li>
 </ul>
 <h4 id="zosmf-connection-options">Zosmf Connection Options</h4>
 <ul>
@@ -13620,6 +13911,13 @@ at any time. However, the VOLSER is required only when the data set is not
 cataloged on the system. A VOLSER is analogous to a drive name on a PC.</li>
 </ul>
 </li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
+</ul>
+</li>
 </ul>
 <h4 id="zosmf-connection-options">Zosmf Connection Options</h4>
 <ul>
@@ -13740,6 +14038,13 @@ delimiters are added between records.</li>
 according to the encoding specified.</li>
 </ul>
 </li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
+</ul>
+</li>
 </ul>
 <h4 id="zosmf-connection-options">Zosmf Connection Options</h4>
 <ul>
@@ -13851,6 +14156,13 @@ nowait, error</p>
 <li>The volume serial (VOLSER) where the data set resides. You can use this option
 at any time. However, the VOLSER is required only when the data set is not
 cataloged on the system. A VOLSER is analogous to a drive name on a PC.</li>
+</ul>
+</li>
+<li><p><code>--responseTimeout</code>  | <code>--rto</code> <em>(number)</em></p>
+<ul>
+<li>The maximum amount of time in seconds the z/OSMF Files TSO servlet should run
+before returning a response. Any request exceeding this amount of time will be
+terminated and return an error. Allowed values: 5 - 600</li>
 </ul>
 </li>
 </ul>
@@ -15138,8 +15450,7 @@ in the output.</li>
 </ul>
 <a class="cmd-anchor" name="zowe_zos-ftp_list_spool-files-by-jobid"></a><h3><a href="#zowe">zowe</a> › <a href="#zowe_zos-ftp">zos-ftp</a> › <a href="#zowe_zos-ftp_list">list</a> › <a href="#zowe_zos-ftp_list_spool-files-by-jobid">spool-files-by-jobid</a><button id="btn-print" class="no-print" onclick="window.print();" title="Print">🖨️</button></h3>
 <p>Given a z/OS job JOBID, list the spool files (DDs) for a z/OS job on the
-JES/spool queues. The command does not pre-validate the JOBID. The command
-presents errors verbatim from the z/OSMF Jobs REST endpoints.</p>
+JES/spool queues. The command does not pre-validate the JOBID.</p>
 <h4 id="usage">Usage</h4>
 <p>   zowe  zos-ftp list spool-files-by-jobid &lt;jobid&gt; [options]</p>
 <h4 id="positional-arguments">Positional Arguments</h4>
@@ -17016,8 +17327,7 @@ pipe it into the hex viewer program xxd:</p>
 </ul>
 <a class="cmd-anchor" name="zowe_zos-ftp_view_job-status-by-jobid"></a><h3><a href="#zowe">zowe</a> › <a href="#zowe_zos-ftp">zos-ftp</a> › <a href="#zowe_zos-ftp_view">view</a> › <a href="#zowe_zos-ftp_view_job-status-by-jobid">job-status-by-jobid</a><button id="btn-print" class="no-print" onclick="window.print();" title="Print">🖨️</button></h3>
 <p>View status details of a single z/OS job on spool/JES queues. The command does
-not prevalidate the JOBID. The command presents errors verbatim from the z/OSMF
-Jobs REST endpoints (expect for &quot;no jobs found&quot;).</p>
+not prevalidate the JOBID.</p>
 <h4 id="usage">Usage</h4>
 <p>   zowe  zos-ftp view job-status-by-jobid &lt;jobid&gt; [options]</p>
 <h4 id="positional-arguments">Positional Arguments</h4>
@@ -17163,8 +17473,7 @@ abbreviating the ID):</p>
 </ul>
 <a class="cmd-anchor" name="zowe_zos-ftp_view_spool-file-by-id"></a><h3><a href="#zowe">zowe</a> › <a href="#zowe_zos-ftp">zos-ftp</a> › <a href="#zowe_zos-ftp_view">view</a> › <a href="#zowe_zos-ftp_view_spool-file-by-id">spool-file-by-id</a><button id="btn-print" class="no-print" onclick="window.print();" title="Print">🖨️</button></h3>
 <p>View the contents of a spool file from a z/OS job on spool/JES queues. The
-command does not pre-validate the JOBID or spool ID. The command presents
-errors verbatim from the z/OSMF Jobs REST endpoints.</p>
+command does not pre-validate the JOBID or spool ID.</p>
 <h4 id="usage">Usage</h4>
 <p>   zowe  zos-ftp view spool-file-by-id &lt;jobid&gt; &lt;spoolfileid&gt; [options]</p>
 <h4 id="positional-arguments">Positional Arguments</h4>
@@ -17177,9 +17486,8 @@ pre-validation of the JOBID is performed.</li>
 </li>
 <li><p><code>spoolfileid</code>         <em>(number)</em></p>
 <ul>
-<li>The spool file ID number for the spool file to view. Use the &quot;imperative
-zos-jobs list spool-files-by-jobid&quot; command to obtain spool ID numbers.No
-pre-validation of the ID is performed.</li>
+<li>The spool file ID number for the spool file to view. No pre-validation of the
+ID is performed.</li>
 </ul>
 </li>
 </ul>

@@ -15,10 +15,10 @@ Before creating an instance directory, ensure that you have created a keystore d
 
 To create an instance directory, use the `zowe-configure-instance.sh` script.
 
-Navigate to the Zowe runtime directory `<ZOWE_ROOT_DIR>` and execute the following commands:
+Navigate to the Zowe runtime directory `<RUNTIME_DIR>` and execute the following commands:
 
 ```sh
-<ROOT_DIR>/bin/zowe-configure-instance.sh -c <PATH_TO_INSTANCE_DIR>
+<RUNTIME_DIR>/bin/zowe-configure-instance.sh -c <PATH_TO_INSTANCE_DIR>
 ```
 
 Multiple instance directories can be created and used to launch independent Zowe runtimes from the same Zowe runtime directory.  
@@ -32,7 +32,7 @@ If you have an instance directory that is created from a previous release of Zow
 In order to allow the `ZWESVSTC` started task to have permission to acces the contents of the `<INSTANCE_DIR>` the `zowe-configure-instance.sh` script sets the group ownership of the top level directory and its child to be `ZWEADMIN`.  If a different group is used for the `ZWESVSTC` started task you can specify this with the optional `-g` argument, for example.
 
 ```sh
-<ROOT_DIR>/bin/zowe-configure-instance.sh -c <PATH_TO_INSTANCE_DIR> -g <GROUP>
+<RUNTIME_DIR>/bin/zowe-configure-instance.sh -c <PATH_TO_INSTANCE_DIR> -g <GROUP>
 ```
 
 ## Reviewing the instance.env file
@@ -50,7 +50,7 @@ To operate Zowe, a number of zFS folders need to be located for prerequisites on
 
 - `JAVA_HOME`:  The path where 64-bit Java 8 or later is installed.  Only needs to be specified if not already set as a shell variable.  Defaults to `/usr/lpp/java/J8.0_64`.
 - `NODE_HOME`:  The path to the Node.js runtime.  Only needs to be specified if not already set as a shell variable.  
-- `ROOT_DIR`: The directory where the Zowe runtime is located.  Defaults to the location of where `zowe-configure-instance` was executed. 
+- `ROOT_DIR`: The directory where the Zowe runtime is located, also referred to as the `<RUNTIME_DIR>`.  Defaults to the location of where `zowe-configure-instance` was executed. 
 - `ZOSMF_PORT`: The port used by z/OSMF REST services.  Defaults to value determined through running `netstat`.
 - `ZOSMF_HOST`: The host name of the z/OSMF REST API services.
 - `ZOWE_EXPLORER_HOST`: The hostname of where the Explorer servers are launched from.  Defaults to running `hostname -c`.  Ensure that this host name is externally accessible from clients who want to use Zowe as well as internally accessible from z/OS itself.  
@@ -134,6 +134,18 @@ To determine which ports are not available, follow these steps:
 - `ZOWE_ZLUX_SSH_PORT`: The Zowe desktop contains an application *VT Terminal* which opens a terminal to z/OS inside the Zowe desktop web page.  This port is the number used by the z/OS SSH service and defaults to 22.  The USS command `netstat -b | grep SSHD1` can be used to display the SSH port used on a z/OS system.  
 - `ZOWE_ZLUX_TELNET_PORT`: The Zowe desktop contains an application *3270 Terminal* which opens a 3270 emulator inside the Zowe desktop web page.  This port is the number used by the z/OS telnet service and defaults to 23. The USS command `netstat -b | grep TN3270` can be used to display the telnet port used on a z/OS system.
 - `ZOWE_ZLUX_SECURITY_TYPE`: The *3270 Terminal* application needs to know whether the telnet service is using `tls` or `telnet` for security.  The default value is blank for `telnet`.
+
+### Gateway configuration
+
+- `APIML_ALLOW_ENCODED_SLASHES`: When this parameter is set to `true`, the Gateway allows encoded characters to be part of URL requests redirected through the Gateway.
+- `APIML_CORS_ENABLED`: When this parameter is set to `true`, CORS are enabled in the API Gateway for Gateway routes `api/v1/gateway/**`.
+- `APIML_PREFER_IP_ADDRESS`: Set the value of the parameter to `true` if you want to advertise a service IP address instead of its hostname.
+- `APIML_GATEWAY_TIMEOUT_MILLIS`: Timeout for connection to the services. 
+- `APIML_SECURITY_X509_ENABLED`: When this parameter is set to `true`, the client certificate authentication functionality through ZSS is enabled.
+- `APIML_SECURITY_ZOSMF_APPLID`: The z/OSMF APPLID used for PassTicket.
+- `APIML_SECURITY_AUTH_PROVIDER`: The authentication provider used by the API Gateway. By default, the API Gateway uses z/OSMF as an authentication provider, but it is possible to switch to SAF as the authentication provider instead of z/OSMF.
+
+Refer to detailed section about [API Gateway configuration](api-mediation/api-gateway-configuration.md)
 
 ### Extensions
 
